@@ -1,3 +1,8 @@
+<!--
+    Paul B.
+    SDEV 328 - Midterm
+    5/14/21
+-->
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,10 +24,22 @@
             <h1>Midterm Survey</h1>
 
             <!--Name Field-->
+            <br>
+            <check if="{{ isset(@errors['name']) }}">
+                <span class="err">{{ @errors['name'] }}</span>
+            </check>
+            <br>
             <label>Name: <input class="form-control" type="text" name="name" id="name"></label>
+
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Select all that apply</label><br>
+
+                <br>
+                <check if="{{ isset(@errors['quest']) }}">
+                    <span class="err">{{ @errors['quest'] }}</span>
+                </check>
+                <br>
 
                 <repeat group="{{ @questions }}" value="{{ @question }}">
                     <label>
@@ -32,6 +49,8 @@
                         </input>
                     </label><br>
                 </repeat>
+
+
 
             </div>
 
