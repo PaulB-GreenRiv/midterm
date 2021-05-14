@@ -26,13 +26,37 @@ $f3->route('GET /', function(){
 });
 
 //Survey Route
-$f3->route('GET /survey', function($f3){
-    //Display the home page
+$f3->route('GET|POST /survey', function($f3){
+
+    //Reinitialize session array
+    $_SESSION = array();
+
+    //Initialize fields
+    $nameField = "";
+    $questField = array();
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        //Assign POST to fields
+        $nameField = $_POST['name'];
+        $questField = implode(", ", $_POST['quest']);
+        //Send fields to session
+        $_SESSION['name'] = $nameField;
+        $_SESSION['quest'] = $questField;
+
+        header('location: summary');
+    }
 
     $f3->set('questions', getQuestions());
 
     $view = new Template();
     echo $view->render('views/survey.html');
+});
+
+//Summary Route
+$f3->route('GET|POST /summary', function($f3) {
+    $view = new Template();
+    echo $view->render('views/summary.html');
 });
 
 //Run Fat-Free
