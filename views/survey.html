@@ -14,11 +14,32 @@
 <body>
     <form action="#" method="post" class="form-horizontal">
 
-        <!--Name Field-->
-        <label>Name: <input class="form-control" type="text" name="name" id="name"></label>
+        <div class="container">
 
+            <h1>Midterm Survey</h1>
 
+            <!--Name Field-->
+            <label>Name: <input class="form-control" type="text" name="name" id="name"></label>
 
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Select all that apply</label><br>
+
+                <repeat group="{{ @questions }}" value="{{ @question }}">
+                    <label>
+                        <input type="checkbox" name="quest[]"
+                        id="{{ @question }}" value="{{ @question }}">
+                            {{ ucfirst(@question) }}
+                        </input>
+                    </label><br>
+                </repeat>
+
+            </div>
+
+            <div class="btn btn-info">
+                <input class="form-control btn btn-default"
+                       type="submit" value="Submit">
+            </div>
+        </div>
     </form>
 </body>
 </html>

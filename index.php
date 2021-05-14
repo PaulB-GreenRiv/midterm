@@ -9,12 +9,14 @@ error_reporting(E_ALL);
 //Start a session
 session_start();
 
-//Instantiate Fat-Free
-$f3 = Base::instance();
-
 //Require autoload file
 require_once ('vendor/autoload.php');
 require_once ('model/data-layer.php');
+
+//Instantiate Fat-Free
+$f3 = Base::instance();
+
+
 
 //Define default route
 $f3->route('GET /', function(){
@@ -24,8 +26,11 @@ $f3->route('GET /', function(){
 });
 
 //Survey Route
-$f3->route('GET /survey', function(){
+$f3->route('GET /survey', function($f3){
     //Display the home page
+
+    $f3->set('questions', getQuestions());
+
     $view = new Template();
     echo $view->render('views/survey.html');
 });
